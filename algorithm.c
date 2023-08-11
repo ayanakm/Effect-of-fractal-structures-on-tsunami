@@ -13,7 +13,7 @@ double boundaryCondition(double x) {
 int main() {
     // パラメータ設定
     double T = 100.0;      // 時間上限
-    int M = 1000;         // 時間刻み数
+    int M = 10000;         // 時間刻み数
     double L = 1.0;        // 空間幅
     int N = 100;          // 空間刻み数
     double c = 1.0;        // 波の速さ
@@ -26,6 +26,7 @@ int main() {
     double u[N+2];         // u(x, t)
     double old_u[N+2];     // 前の時刻のu(x, t)
     double new_u[N+2];     // 次の時刻のu(x, t)
+    double t[M];    // 時間
 
     // 初期値設定
     for (int j = 1; j <= N; j++) {
@@ -45,9 +46,10 @@ int main() {
 
     // 計算と動画描画
     for (int k = 0; k < M; k++) {
+        t[k] = ((k + 1) * 1.0) * tau;
         // 現在の状態を表示
         for (int j = 1; j <= N; j++) {
-            printf("(%f, %f) ", x[j], u[j]);
+            printf("(%f, %f, %f) ", x[j], u[j], t[k]);
         }
         printf("\n");
 
